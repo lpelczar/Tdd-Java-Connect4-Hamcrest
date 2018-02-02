@@ -75,4 +75,16 @@ public class Connect4 {
             System.out.println(stringJoiner.toString());
         }
     }
+
+    public boolean isFinished() {
+        int numOfDiscs = 0;
+        for (int col = 0; col < COLUMNS; ++col) {
+            numOfDiscs += getNumberOfDiscsInColumn(col);
+        }
+        if (numOfDiscs >= COLUMNS * ROWS) {
+            System.out.println("It is a draw");
+            return true;
+        }
+        return false;
+    }
 }
