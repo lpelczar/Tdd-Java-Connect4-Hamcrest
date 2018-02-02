@@ -71,6 +71,33 @@ public class Connect4 {
         if (winPattern.matcher(stringJoiner.toString()).matches()) {
             winner = currentPlayer;
             System.out.println(currentPlayer + " wins!");
+            return;
+        }
+        int startOffset = Math.min(col, row);
+        int column = col - startOffset;
+        int auxRow = row - startOffset;
+        stringJoiner = new StringJoiner("");
+        do {
+            stringJoiner.add(board[column++][auxRow++].toString());
+        } while (column < COLUMNS && auxRow < ROWS);
+
+        if (winPattern.matcher(stringJoiner.toString()).matches()) {
+            winner = currentPlayer;
+            System.out.println(currentPlayer + " wins!");
+            return;
+        }
+
+        startOffset = Math.min(col, ROWS - 1 - row);
+        column = col - startOffset;
+        auxRow = row + startOffset;
+        stringJoiner = new StringJoiner("");
+        do {
+            stringJoiner.add(board[column++][auxRow--].toString());
+        } while (column < COLUMNS && auxRow >= 0);
+
+        if (winPattern.matcher(stringJoiner.toString()).matches()) {
+            winner = currentPlayer;
+            System.out.println(currentPlayer + " wins!");
         }
     }
 
