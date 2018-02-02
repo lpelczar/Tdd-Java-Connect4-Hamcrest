@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 public class Connect4 {
 
@@ -17,8 +18,9 @@ public class Connect4 {
         }
     }
 
-    public static final int COLUMNS = 7;
-    public static final int ROWS = 6;
+    private static final int COLUMNS = 7;
+    private static final int ROWS = 6;
+    private static final String DELIMITER = "|";
     private Color[][] board = new Color[COLUMNS][ROWS];
     private Color currentPlayer = Color.RED;
 
@@ -33,8 +35,16 @@ public class Connect4 {
             int numOfDiscs = getNumberOfDiscsInColumn(column - 1);
             if (numOfDiscs < ROWS) {
                 board[column - 1][numOfDiscs] = currentPlayer;
+                printBoard();
                 switchPlayer();
+            } else {
+                System.out.println(numOfDiscs);
+                System.out.println("There is no empty place in this column");
+                printBoard();
             }
+        } else {
+            System.out.println("This column is not in the board");
+            printBoard();
         }
     }
 
@@ -53,5 +63,16 @@ public class Connect4 {
 
     private void switchPlayer() {
         currentPlayer = currentPlayer == Color.RED ? Color.GREEN : Color.RED;
+        System.out.println("Current player: " + currentPlayer);
+    }
+
+    public void printBoard() {
+        for (int row = ROWS - 1; row >= 0; --row) {
+            StringJoiner stringJoiner = new StringJoiner(DELIMITER, DELIMITER, DELIMITER);
+            for (int col = 0; col < COLUMNS; ++col) {
+                stringJoiner.add(board[col][row].toString());
+            }
+            System.out.println(stringJoiner.toString());
+        }
     }
 }
