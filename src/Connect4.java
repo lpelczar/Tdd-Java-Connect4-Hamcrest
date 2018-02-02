@@ -20,6 +20,7 @@ public class Connect4 {
     public static final int COLUMNS = 7;
     public static final int ROWS = 6;
     private Color[][] board = new Color[COLUMNS][ROWS];
+    private Color currentPlayer = Color.RED;
 
     public Connect4() {
         for (Color[] column: board) {
@@ -31,7 +32,8 @@ public class Connect4 {
         if (column > 0 && column <= COLUMNS) {
             int numOfDiscs = getNumberOfDiscsInColumn(column - 1);
             if (numOfDiscs < ROWS) {
-                board[column - 1][numOfDiscs] = Color.RED;
+                board[column - 1][numOfDiscs] = currentPlayer;
+                switchPlayer();
             }
         }
     }
@@ -47,5 +49,9 @@ public class Connect4 {
             return row;
         }
         return -1;
+    }
+
+    private void switchPlayer() {
+        currentPlayer = currentPlayer == Color.RED ? Color.GREEN : Color.RED;
     }
 }
