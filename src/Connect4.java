@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.StringJoiner;
+import java.util.regex.Pattern;
 
 public class Connect4 {
 
@@ -20,9 +21,12 @@ public class Connect4 {
 
     private static final int COLUMNS = 7;
     private static final int ROWS = 6;
+    private static final int DISCS_FOR_WIN = 4;
     private static final String DELIMITER = "|";
     private Color[][] board = new Color[COLUMNS][ROWS];
     private Color currentPlayer = Color.RED;
+    private Color winner;
+
 
     public Connect4() {
         for (Color[] column: board) {
@@ -36,6 +40,7 @@ public class Connect4 {
             if (numOfDiscs < ROWS) {
                 board[column - 1][numOfDiscs] = currentPlayer;
                 printBoard();
+                checkWinCondition(column - 1, numOfDiscs);
                 switchPlayer();
             } else {
                 System.out.println(numOfDiscs);
@@ -45,6 +50,18 @@ public class Connect4 {
         } else {
             System.out.println("This column is not in the board");
             printBoard();
+        }
+    }
+
+    private void checkWinCondition(int col, int numOfDiscs) {
+        Pattern winPattern = Pattern.compile(".*" + currentPlayer + "{" + DISCS_FOR_WIN + "}.*");
+        StringJoiner stringJoiner = new StringJoiner("");
+        for (int auxRow = 0; auxRow < ROWS; ++auxRow) {
+            stringJoiner.add(board[col][auxRow].toString());
+        }
+        if (winPattern.matcher(stringJoiner.toString()).matches()) {
+            winner = currentPlayer;
+            System.out.println(currentPlayer + " wins!");
         }
     }
 
@@ -77,6 +94,7 @@ public class Connect4 {
     }
 
     public boolean isFinished() {
+        if (winner != null) return true;
         int numOfDiscs = 0;
         for (int col = 0; col < COLUMNS; ++col) {
             numOfDiscs += getNumberOfDiscsInColumn(col);
@@ -87,4 +105,6 @@ public class Connect4 {
         }
         return false;
     }
+
+
 }
