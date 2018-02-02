@@ -53,11 +53,20 @@ public class Connect4 {
         }
     }
 
-    private void checkWinCondition(int col, int numOfDiscs) {
+    private void checkWinCondition(int col, int row) {
         Pattern winPattern = Pattern.compile(".*" + currentPlayer + "{" + DISCS_FOR_WIN + "}.*");
         StringJoiner stringJoiner = new StringJoiner("");
         for (int auxRow = 0; auxRow < ROWS; ++auxRow) {
             stringJoiner.add(board[col][auxRow].toString());
+        }
+        if (winPattern.matcher(stringJoiner.toString()).matches()) {
+            winner = currentPlayer;
+            System.out.println(currentPlayer + " wins!");
+            return;
+        }
+        stringJoiner = new StringJoiner("");
+        for (int column = 0; column < COLUMNS; ++column) {
+            stringJoiner.add(board[column][row].toString());
         }
         if (winPattern.matcher(stringJoiner.toString()).matches()) {
             winner = currentPlayer;
