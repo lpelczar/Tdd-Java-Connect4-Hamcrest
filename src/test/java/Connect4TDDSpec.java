@@ -44,4 +44,11 @@ public class Connect4TDDSpec {
         tested.putDiscInColumn(column);
         assertThat(tested.putDiscInColumn(column), is(1));
     }
+
+    @Test
+    public void whenDiscInsertedThenNumberOfDiscsIncreases() {
+        int column = 1;
+        tested.putDiscInColumn(column);
+        assertThat(tested.getNumberOfDiscs(), is(1));
+    }
 }
