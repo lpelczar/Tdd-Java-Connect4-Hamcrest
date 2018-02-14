@@ -14,7 +14,15 @@ public class Connect4TDD {
     }
 
     public int getNumberOfDiscs() {
-        return 0;
+        int numOfDiscs = 0;
+        for (String[] row : board) {
+            for (String column : row) {
+                if (column.equals("X")) {
+                    numOfDiscs++;
+                }
+            }
+        }
+        return numOfDiscs;
     }
 
     public int putDiscInColumn(int column) {
