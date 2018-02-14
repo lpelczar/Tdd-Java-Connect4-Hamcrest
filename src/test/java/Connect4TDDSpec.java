@@ -51,4 +51,16 @@ public class Connect4TDDSpec {
         tested.putDiscInColumn(column);
         assertThat(tested.getNumberOfDiscs(), is(1));
     }
+
+    @Test
+    public void whenNoMoreRoomInColumnThenRuntimeException() {
+        int column = 1;
+        int maxDiscsInColumn = 6;
+        for (int times = 0; times < maxDiscsInColumn; ++times) {
+            tested.putDiscInColumn(column);
+        }
+        exception.expect(RuntimeException.class);
+        exception.expectMessage("No room in column number " + column);
+        tested.putDiscInColumn(column);
+    }
 }
