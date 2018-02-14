@@ -37,4 +37,11 @@ public class Connect4TDDSpec {
         int column = 1;
         assertThat(tested.putDiscInColumn(column), is(0));
     }
+
+    @Test
+    public void whenSecondDiscInsertedInColumnThenPositionIsOne() {
+        int column = 1;
+        tested.putDiscInColumn(column);
+        assertThat(tested.putDiscInColumn(column), is(1));
+    }
 }
