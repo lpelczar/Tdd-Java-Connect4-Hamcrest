@@ -31,4 +31,10 @@ public class Connect4TDDSpec {
         exception.expectMessage("Wrong column " + column);
         tested.putDiscInColumn(column);
     }
+
+    @Test
+    public void whenFirstDiscInsertedInColumnThenPositionIsZero() {
+        int column = 1;
+        assertThat(tested.putDiscInColumn(column), is(0));
+    }
 }
