@@ -25,20 +25,22 @@ public class Connect4TDD {
     }
 
     public int putDiscInColumn(int column) {
-        int row;
-        if (column < 0 || column > 6) {
-            throw new RuntimeException("Wrong column " + column);
-        } else {
-            row = getNumberOfDiscsInColumn(column);
-            checkInsertPosition(row, column);
-            board[row][column] = "X";
-        }
+        checkColumn(column);
+        int row = getNumberOfDiscsInColumn(column);
+        checkInsertPosition(row, column);
+        board[row][column] = "X";
         return row;
     }
 
     private void checkInsertPosition(int row, int column) {
         if (row == ROWS) {
             throw new RuntimeException("No room in column number " + column);
+        }
+    }
+
+    private void checkColumn(int column) {
+        if (column < 0 || column > COLUMNS) {
+            throw new RuntimeException("Wrong column " + column);
         }
     }
 }
