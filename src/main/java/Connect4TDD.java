@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Connect4TDD {
 
@@ -14,15 +15,7 @@ public class Connect4TDD {
     }
 
     public int getNumberOfDiscs() {
-        int numOfDiscs = 0;
-        for (String[] row : board) {
-            for (String column : row) {
-                if (column.equals("X")) {
-                    numOfDiscs++;
-                }
-            }
-        }
-        return numOfDiscs;
+        return IntStream.range(0, COLUMNS).map(this::getNumberOfDiscsInColumn).sum();
     }
 
     public int putDiscInColumn(int column) {
