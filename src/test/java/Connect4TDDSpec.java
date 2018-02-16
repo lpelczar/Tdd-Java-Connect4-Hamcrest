@@ -69,4 +69,11 @@ public class Connect4TDDSpec {
         String color = tested.getActualColor();
         assertThat(color, is("R"));
     }
+
+    @Test
+    public void whenSecondPlayerThenGreenColor() {
+        tested.putDiscInColumn(1);
+        String color = tested.getActualColor();
+        assertThat(color, is("G"));
+    }
 }
