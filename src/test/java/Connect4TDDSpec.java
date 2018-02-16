@@ -63,4 +63,10 @@ public class Connect4TDDSpec {
         exception.expectMessage("No room in column number " + column);
         tested.putDiscInColumn(column);
     }
+
+    @Test
+    public void whenGameStartsThenRedColor() {
+        String color = tested.getActualColor();
+        assertThat(color, is("R"));
+    }
 }
