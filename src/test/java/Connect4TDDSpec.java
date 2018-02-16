@@ -100,4 +100,14 @@ public class Connect4TDDSpec {
     public void whenBoardIsEmptyThenGameIsActive() {
         assertThat(tested.isActive(), is(true));
     }
+
+    @Test
+    public void whenBoardIsFullThenGameIsNotActive() {
+        for (int row = 0; row < 6; row++) {
+            for (int column = 0; column < 7; column++) {
+                tested.putDiscInColumn(column);
+            }
+        }
+        assertThat(tested.isActive(), is(false));
+    }
 }
