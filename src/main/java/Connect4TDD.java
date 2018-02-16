@@ -31,9 +31,16 @@ public class Connect4TDD {
             throw new RuntimeException("Wrong column " + column);
         } else {
             row = getNumberOfDiscsInColumn(column);
+            checkInsertPosition(row, column);
             board[row][column] = "X";
         }
         return row;
+    }
+
+    private void checkInsertPosition(int row, int column) {
+        if (row == ROWS) {
+            throw new RuntimeException("No room in column number " + column);
+        }
     }
 
     private int getNumberOfDiscsInColumn(int column) {
