@@ -18,6 +18,12 @@ public class Connect4TDD {
         return IntStream.range(0, COLUMNS).map(this::getNumberOfDiscsInColumn).sum();
     }
 
+    private int getNumberOfDiscsInColumn(int column) {
+        return (int) IntStream.range(0, ROWS)
+                .filter(row -> !EMPTY.equals(board[row][column]))
+                .count();
+    }
+
     public int putDiscInColumn(int column) {
         int row;
         if (column < 0 || column > 6) {
@@ -34,15 +40,5 @@ public class Connect4TDD {
         if (row == ROWS) {
             throw new RuntimeException("No room in column number " + column);
         }
-    }
-
-    private int getNumberOfDiscsInColumn(int column) {
-        int numOfDiscs = 0;
-        for (String[] row : board) {
-            if (row[column].equals("X")) {
-                numOfDiscs++;
-            }
-        }
-        return numOfDiscs;
     }
 }
