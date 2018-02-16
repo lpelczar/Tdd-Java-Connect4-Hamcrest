@@ -3,6 +3,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -10,10 +15,12 @@ import static org.junit.Assert.*;
 public class Connect4TDDSpec {
 
     private Connect4TDD tested;
+    private OutputStream output;
 
     @Before
     public void beforeEachTest() {
-        tested = new Connect4TDD();
+        output = new ByteArrayOutputStream();
+        tested = new Connect4TDD(new PrintStream(output));
     }
 
     @Test
@@ -75,5 +82,11 @@ public class Connect4TDDSpec {
         tested.putDiscInColumn(1);
         String color = tested.getActualColor();
         assertThat(color, is("G"));
+    }
+
+    @Test
+    public void whenGettingActualColorThenTheOutputIsNoticed() {
+        tested.getActualColor();
+        assertThat(output.toString(), containsString("Red color turn"));
     }
 }
