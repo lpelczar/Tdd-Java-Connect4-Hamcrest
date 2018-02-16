@@ -30,10 +30,14 @@ public class Connect4TDD {
         int row = getNumberOfDiscsInColumn(column);
         checkInsertPosition(row, column);
         board[row][column] = actualColor;
+        changePlayerColor();
+        return row;
+    }
+
+    private void changePlayerColor() {
         if (actualColor.equals("R")) {
             actualColor = "G";
         }
-        return row;
     }
 
     private void checkInsertPosition(int row, int column) {
