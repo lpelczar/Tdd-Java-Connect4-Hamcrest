@@ -73,4 +73,8 @@ public class Connect4TDD {
         output.println(actualColor.equals("R") ? "Red color turn" : "Green color turn");
         return actualColor;
     }
+
+    public boolean isActive() {
+        return getNumberOfDiscs() != ROWS * COLUMNS;
+    }
 }
