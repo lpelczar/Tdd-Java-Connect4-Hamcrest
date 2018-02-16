@@ -9,6 +9,7 @@ import java.io.PrintStream;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.isEmptyString;
 import static org.junit.Assert.*;
 
 
@@ -109,5 +110,18 @@ public class Connect4TDDSpec {
             }
         }
         assertThat(tested.isActive(), is(false));
+    }
+
+    @Test
+    public void whenThreeDiscsInColumnThenWin() {
+        tested.putDiscInColumn(1);
+        tested.putDiscInColumn(2);
+        tested.putDiscInColumn(1);
+        tested.putDiscInColumn(3);
+        tested.putDiscInColumn(1);
+        tested.putDiscInColumn(3);
+        assertThat(tested.checkWinner(), isEmptyString());
+        tested.putDiscInColumn(1);
+        assertThat(tested.checkWinner(), is("R"));
     }
 }
