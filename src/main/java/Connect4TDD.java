@@ -7,6 +7,7 @@ public class Connect4TDD {
     private static final int COLUMNS = 7;
     private static final String EMPTY = " ";
     private String[][] board = new String[ROWS][COLUMNS];
+    private String actualColor = "R";
 
     Connect4TDD() {
         for (String[] row : board) {
@@ -42,5 +43,9 @@ public class Connect4TDD {
         if (column < 0 || column > COLUMNS) {
             throw new RuntimeException("Wrong column " + column);
         }
+    }
+
+    public String getActualColor() {
+        return actualColor;
     }
 }
