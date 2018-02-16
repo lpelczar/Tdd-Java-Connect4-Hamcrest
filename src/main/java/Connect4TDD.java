@@ -1,3 +1,4 @@
+import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
@@ -8,8 +9,10 @@ public class Connect4TDD {
     private static final String EMPTY = " ";
     private String[][] board = new String[ROWS][COLUMNS];
     private String actualColor = "R";
+    private PrintStream output;
 
-    Connect4TDD() {
+    Connect4TDD(PrintStream out) {
+        output = out;
         for (String[] row : board) {
             Arrays.fill(row, EMPTY);
         }
@@ -53,6 +56,7 @@ public class Connect4TDD {
     }
 
     public String getActualColor() {
+        output.println(actualColor.equals("R") ? "Red color turn" : "Green color turn");
         return actualColor;
     }
 }
