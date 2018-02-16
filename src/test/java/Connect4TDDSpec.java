@@ -113,7 +113,7 @@ public class Connect4TDDSpec {
     }
 
     @Test
-    public void whenThreeDiscsInColumnThenWin() {
+    public void whenFourDiscsInColumnThenWin() {
         tested.putDiscInColumn(1);
         tested.putDiscInColumn(2);
         tested.putDiscInColumn(1);
@@ -122,6 +122,17 @@ public class Connect4TDDSpec {
         tested.putDiscInColumn(3);
         assertThat(tested.getWinner(), isEmptyString());
         tested.putDiscInColumn(1);
+        assertThat(tested.getWinner(), is("R"));
+    }
+
+    @Test
+    public void whenFourDiscsInRowThenWin() {
+        for (int i = 1; i < 4; i++) {
+            tested.putDiscInColumn(i);
+            tested.putDiscInColumn(i);
+        }
+        assertThat(tested.getWinner(), isEmptyString());
+        tested.putDiscInColumn(4);
         assertThat(tested.getWinner(), is("R"));
     }
 }
