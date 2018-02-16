@@ -120,8 +120,8 @@ public class Connect4TDDSpec {
         tested.putDiscInColumn(3);
         tested.putDiscInColumn(1);
         tested.putDiscInColumn(3);
-        assertThat(tested.checkWinner(), isEmptyString());
+        assertThat(tested.getWinner(), isEmptyString());
         tested.putDiscInColumn(1);
-        assertThat(tested.checkWinner(), is("R"));
+        assertThat(tested.getWinner(), is("R"));
     }
 }

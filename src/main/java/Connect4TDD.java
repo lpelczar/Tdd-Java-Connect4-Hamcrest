@@ -1,6 +1,7 @@
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.StringJoiner;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -13,6 +14,7 @@ public class Connect4TDD {
     private String[][] board = new String[ROWS][COLUMNS];
     private String actualColor = "R";
     private PrintStream output;
+    private String winner = "";
 
     Connect4TDD(PrintStream out) {
         output = out;
@@ -38,6 +40,7 @@ public class Connect4TDD {
         board[row][column] = actualColor;
         changePlayerColor();
         printBoard();
+        checkWinner(row, column);
         return row;
     }
 
@@ -54,6 +57,8 @@ public class Connect4TDD {
     private void changePlayerColor() {
         if (actualColor.equals("R")) {
             actualColor = "G";
+        } else {
+            actualColor = "R";
         }
     }
 
@@ -76,5 +81,23 @@ public class Connect4TDD {
 
     public boolean isActive() {
         return getNumberOfDiscs() != ROWS * COLUMNS;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    private void checkWinner(int row, int column) {
+        final int WIN = 4;
+        String color = board[row][column];
+        Pattern winPattern = Pattern.compile(".*" + color + "{" + WIN + "}.*");
+        StringBuilder vertical = new StringBuilder();
+        for (int i = 0; i < ROWS; i++) {
+            vertical.append(board[i][column]);
+        }
+        System.out.println(vertical);
+        if (winPattern.matcher(vertical.toString()).matches()) {
+            winner = color;
+        }
     }
 }
