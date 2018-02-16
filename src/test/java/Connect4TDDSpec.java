@@ -95,4 +95,9 @@ public class Connect4TDDSpec {
         tested.putDiscInColumn(1);
         assertThat(output.toString(), containsString("| |R| | | | | |"));
     }
+
+    @Test
+    public void whenBoardIsEmptyThenGameIsActive() {
+        assertThat(tested.isActive(), is(true));
+    }
 }
