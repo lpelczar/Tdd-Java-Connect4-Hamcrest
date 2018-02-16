@@ -89,4 +89,10 @@ public class Connect4TDDSpec {
         tested.getActualColor();
         assertThat(output.toString(), containsString("Red color turn"));
     }
+
+    @Test
+    public void whenFirstDiscAddedThenPrintBoard() {
+        tested.putDiscInColumn(1);
+        assertThat(output.toString(), containsString("| |R| | | | | |"));
+    }
 }
