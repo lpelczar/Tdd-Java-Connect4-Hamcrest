@@ -94,9 +94,11 @@ public class Connect4TDD {
         String vertical = checkVerticalWin(column);
         String horizontal = checkHorizontalWin(row);
         String diagonal1 = checkDiagonal1Win(row, column);
+        String diagonal2 = checkDiagonal2Win(row, column);
         if (winPattern.matcher(vertical).matches() ||
             winPattern.matcher(horizontal).matches() ||
-            winPattern.matcher(diagonal1).matches()) {
+            winPattern.matcher(diagonal1).matches() ||
+            winPattern.matcher(diagonal2).matches()) {
             winner = color;
         }
     }
@@ -128,5 +130,18 @@ public class Connect4TDD {
             startRow++;
         }
         return diagonal1.toString();
+    }
+
+    private String checkDiagonal2Win(int row, int column) {
+        StringBuilder diagonal2 = new StringBuilder();
+        int offset = Math.min(column, ROWS - row - 1);
+        int startRow = row + offset;
+        int startColumn = column - offset;
+        while (startColumn < COLUMNS && startRow >= 0) {
+            diagonal2.append(board[startRow][startColumn]);
+            startColumn++;
+            startRow--;
+        }
+        return diagonal2.toString();
     }
 }

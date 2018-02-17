@@ -147,7 +147,7 @@ public class Connect4TDDSpec {
 
     @Test
     public void whenFourDiscInDiagonal2ThenWin() {
-        int[] moves = new int[] {3,4,2,3,2,1,1,1,1};
+        int[] moves = new int[] {3,4,2,3,2,2,1,1,1,1};
         for (int m : moves) {
             tested.putDiscInColumn(m);
         }
