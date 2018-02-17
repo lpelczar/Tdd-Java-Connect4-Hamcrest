@@ -135,4 +135,13 @@ public class Connect4TDDSpec {
         tested.putDiscInColumn(4);
         assertThat(tested.getWinner(), is("R"));
     }
+
+    @Test
+    public void whenFourDiscInDiagonal1ThenWin() {
+        int[] moves = new int[] {1,2,2,3,3,4,3};
+        for (int m : moves) {
+            tested.putDiscInColumn(m);
+        }
+        assertThat(tested.getWinner(), is("R"));
+    }
 }
