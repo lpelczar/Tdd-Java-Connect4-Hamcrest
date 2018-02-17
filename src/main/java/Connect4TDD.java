@@ -80,7 +80,7 @@ public class Connect4TDD {
     }
 
     public boolean isActive() {
-        return getNumberOfDiscs() != ROWS * COLUMNS;
+        return getNumberOfDiscs() < ROWS * COLUMNS;
     }
 
     public String getWinner() {
@@ -91,13 +91,27 @@ public class Connect4TDD {
         final int WIN = 4;
         String color = board[row][column];
         Pattern winPattern = Pattern.compile(".*" + color + "{" + WIN + "}.*");
+        String vertical = checkVerticalWin(column);
+        String horizontal = checkHorizontalWin(row);
+        if (winPattern.matcher(vertical).matches() ||
+            winPattern.matcher(horizontal).matches()) {
+            winner = color;
+        }
+    }
+
+    private String checkVerticalWin(int column) {
         StringBuilder vertical = new StringBuilder();
         for (int i = 0; i < ROWS; i++) {
             vertical.append(board[i][column]);
         }
-        System.out.println(vertical);
-        if (winPattern.matcher(vertical.toString()).matches()) {
-            winner = color;
+        return vertical.toString();
+    }
+
+    private String checkHorizontalWin(int row) {
+        StringBuilder horizontal = new StringBuilder();
+        for (int i = 0; i < COLUMNS; i++) {
+            horizontal.append(board[row][i]);
         }
+        return horizontal.toString();
     }
 }
